@@ -18,13 +18,13 @@ public class Main {
             URLConnection yandexUrl = new URL("https://news.yandex.ru/computers.html").openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(yandexUrl.getInputStream()));
             String str;
-            String htmlCode = "";
+            StringBuilder htmlCode = new StringBuilder();
             while (in.readLine() != null) {
                 str = in.readLine().toString();
-                htmlCode += str;
+                htmlCode.append(str);
             }
             in.close();
-            Document doc = Jsoup.parse(htmlCode);
+            Document doc = Jsoup.parse(htmlCode.toString());
             String textOfWebPage = doc.body().text();
             String[] wordsFrowText = textOfWebPage.split(" ");
             for (int i = 0; i < wordsFrowText.length; i++) {
